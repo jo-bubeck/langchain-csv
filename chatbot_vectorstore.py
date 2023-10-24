@@ -11,10 +11,6 @@ import tempfile
 from Secrets.apikey import API_KEY
 
 # Initial setup for langchain / OpenAI usage
-os.environ["OPENAI_API_KEY"] = "YOUR-OPENAI-KEY"
-os.environ["OPENAI_API_TYPE"] = "azure"
-os.environ["OPENAI_API_VERSION"] = "2023-03-15-preview"
-os.environ["OPENAI_API_BASE"] = "https://mhpai.openai.azure.com/"
 os.environ["OPENAI_API_KEY"] = API_KEY
 
 st.title("💬 Retail Co-Pilot Demo")
@@ -34,7 +30,7 @@ embeddings = OpenAIEmbeddings(chunk_size = 10)
 vectorstore = FAISS.from_documents(data, embeddings)
 
 chain = ConversationalRetrievalChain.from_llm(
-llm = AzureOpenAI(model_name="gpt-4-32k", engine="gpt-4-32k"),
+llm = ChatOpenAI(temperature=0.0,model_name='gpt-3.5-turbo'),
 retriever=vectorstore.as_retriever())
 
 def conversational_chat(query):
