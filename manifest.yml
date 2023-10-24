@@ -1,0 +1,9 @@
+---
+applications:
+- name: gptsac
+  random-route: true
+  path: ./
+  memory: 1024M
+  buildpacks: 
+  - python_buildpack
+  command: python app.py
